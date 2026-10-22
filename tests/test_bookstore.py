@@ -20,6 +20,13 @@ def test_example_register():
 
 
 # ---- YOUR SMOKE TESTS (at least 5) ----
+@pytest.mark.smoke
+def test_login_works():
+    """Author: Thant Thurein Lynn-[6805140024]. Smoke: a registered user can log in, and a wrong password is rejected."""
+    users = Users()
+    users.register("alice", "password123")
+    assert users.login("alice", "password123") is True
+    assert users.login("alice", "wrongpass") is False
 
 # ---- YOUR REGRESSION TESTS (the bug hunt) ----
 
