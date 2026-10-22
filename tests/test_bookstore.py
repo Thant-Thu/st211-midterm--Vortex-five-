@@ -50,6 +50,18 @@ def test_add_to_cart_works():
     assert cart.add(999) is False
     assert cart.items == [1]
 
+@pytest.mark.smoke
+def test_checkout_works():
+    """Author: Thant Thurein Lynn-[6805140024]. Smoke: checkout returns an order containing the item added and empties the cart."""
+    catalog = Catalog()
+    catalog.add_product(1, "Python Basics", 25)
+    cart = Cart(catalog)
+    cart.add(1)
+    order = cart.checkout()
+    assert order == [1]
+    assert cart.items == []
+    assert cart.history() == [[1]]
+
 # ---- YOUR REGRESSION TESTS (the bug hunt) ----
 
 
