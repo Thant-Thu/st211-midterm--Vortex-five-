@@ -14,8 +14,18 @@
 **Slow tests** exercise the system with large data or heavy processing and take noticeably longer. They run on a schedule, such as nightly, not on every push. Examples: importing thousands of products into the catalog; searching a catalog of hundreds of thousands of titles.
 
 ## Part B -- Scenario classification
-For each of the six scenarios: smoke / regression / slow (may be more than one)
-with a 2-3 sentence justification.
+
+1. **Password-reset email delivered within one minute: slow.** It depends on an external email service and has to wait for delivery, so it takes far longer than a unit test. It should run nightly, not on every push.
+
+2. **Fixed shipping-cost bug has not returned: regression.** It targets one specific bug that was already fixed, and it should fail if the bug comes back. It runs on every build.
+
+3. **Nightly sales report from ten years of orders: slow.** It processes a very large amount of data, so it runs on a schedule and not on every push.
+
+4. **Payment page loads after every deployment: smoke.** It is a fast check that a critical feature works at all, and a failure should stop the release immediately.
+
+5. **Refund issued twice does not credit the customer twice: regression.** It checks a fault that was reported and fixed, so it guards against that bug returning. It is not smoke because it covers one specific defect, not basic functionality.
+
+6. **Recommendation engine responds with one million titles: slow.** It tests behavior under very large data, so it is too heavy to run on every push. It belongs in the nightly run.
 
 ## Part F -- Team reflection
 1. Why is running only regression tests before every commit inefficient?
