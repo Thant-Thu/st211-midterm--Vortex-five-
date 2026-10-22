@@ -28,6 +28,17 @@ def test_login_works():
     assert users.login("alice", "password123") is True
     assert users.login("alice", "wrongpass") is False
 
+
+@pytest.mark.smoke
+def test_add_product_works():
+    """Author: Thant Thurein Lynn-[6805140024]. Smoke: a product added to the catalog can be found."""
+    catalog = Catalog()
+    catalog.add_product(1, "Python Basics", 25)
+    assert 1 in catalog.products
+    assert catalog.products[1]["title"] == "Python Basics"
+    assert catalog.search("Python") == [1]
+
 # ---- YOUR REGRESSION TESTS (the bug hunt) ----
+
 
 # ---- YOUR SLOW TESTS (at least 2) ----
