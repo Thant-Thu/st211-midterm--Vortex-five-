@@ -38,6 +38,18 @@ def test_add_product_works():
     assert catalog.products[1]["title"] == "Python Basics"
     assert catalog.search("Python") == [1]
 
+
+@pytest.mark.smoke
+def test_add_to_cart_works():
+    """Author: Thant Thurein Lynn-[6805140024]. Smoke: a product added to the cart appears in it, and an unknown product is rejected."""
+    catalog = Catalog()
+    catalog.add_product(1, "Python Basics", 25)
+    cart = Cart(catalog)
+    assert cart.add(1) is True
+    assert cart.items == [1]
+    assert cart.add(999) is False
+    assert cart.items == [1]
+
 # ---- YOUR REGRESSION TESTS (the bug hunt) ----
 
 
