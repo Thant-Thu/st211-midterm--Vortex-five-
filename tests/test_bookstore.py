@@ -62,6 +62,14 @@ def test_checkout_works():
     assert cart.items == []
     assert cart.history() == [[1]]
 
+@pytest.mark.smoke
+def test_register_works():
+    """Author: Thant Thurein Lynn-[6805140024]. Smoke: a new user can register, a duplicate is rejected, and the user can log in."""
+    users = Users()
+    assert users.register("bob", "secret123") is True
+    assert users.register("bob", "other456") is False
+    assert users.login("bob", "secret123") is True
+
 # ---- YOUR REGRESSION TESTS (the bug hunt) ----
 
 
