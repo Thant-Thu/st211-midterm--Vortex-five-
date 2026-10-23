@@ -1,6 +1,6 @@
 # AI Usage Declaration and Audit
 
-**Group:** _____________________  **Members:** _____________________________
+**Group:** Vortex-Five  **Members:** Thant Thurein Lynn, Lin Thant Maung, Khant Naing Hein, Thant Sin Hein, Zaw Moe Aung
 
 **Part D3 of the midterm — 20 marks.** Part 1 is required but carries no marks;
 its absence is an academic-honesty matter. Part 2 is worth 16 (2 per test).
@@ -26,8 +26,8 @@ Not declaring it is not.
 
 | Tool | What we used it for | Where in the project | How we checked it before relying on it |
 |---|---|---|---|
-| *example:* Copilot | completing test boilerplate | `tests/test_bookstore.py` | ran each test against the shipped code and confirmed it failed for the reason we expected |
-| | | | |
+| Copilot | completing test boilerplate | `tests/test_bookstore.py` | ran each test against the shipped code and confirmed it failed for the reason we expected |
+| Claude (Anthropic) | explaining the project layout, drafting the smoke tests, the CI workflow and the Part A/B text | `tests/test_bookstore.py`, `.github/workflows/tests.yml`, `REPORT.md` | ran every smoke test with `pytest -m smoke -v` against the shipped code and confirmed they pass; checked the CI run was green in the Actions tab; edited the report wording ourselves |
 | | | | |
 
 If you kept prompts worth showing, add them in an appendix at the end of this
