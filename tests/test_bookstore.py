@@ -72,5 +72,24 @@ def test_register_works():
 
 # ---- YOUR REGRESSION TESTS (the bug hunt) ----
 
+# ---- BONUS: regression + slow ----
+# Why regression: it pins down one specific defect in Cart.import_products,
+#   the number of products it reports as imported.
+# Why slow: it bulk-imports 200,000 products one by one, so it takes
+#   far longer than the smoke suite.
+# Where in CI: not on every push (too slow); it runs in the nightly full-suite
+#   job, where it guards against that bug coming back at scale.
+@pytest.mark.regression
+@pytest.mark.slow
+def test_large_import_reports_correct_count():
+    """Author: Thant Thurein Lynn-[6805140024]. Cart.import_products must return exactly how many products it imported; expected 200000 for a 200000-item list."""
+    total = 200000
+    catalog = Catalog()
+    cart = Cart(catalog)
+    products = [(i, f"Book {i}", 10) for i in range(total)]
+    imported = cart.import_products(products)
+    assert len(catalog.products) == total
+    assert imported == total
+
 
 # ---- YOUR SLOW TESTS (at least 2) ----
