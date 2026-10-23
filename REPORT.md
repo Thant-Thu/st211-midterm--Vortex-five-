@@ -1,10 +1,13 @@
 # REPORT.md
 
-##Group: <Vortex-Five>   Members: <Thant Thurein Lynn  (Paleon)      -       [6805140024]>
-                                  <Lin Thant Maung     (Voldiel)     -       [6805140001]>
-                                  <Khant Naing Hein    (Jason)       -       [6805140019]>
-                                  <Thant Sin Hein      (Louis)       -       [6805140004]>
-                                  <Zaw Moe Aung        (Zek)         -       [6805140020]>
+## Group: Vortex-Five
+
+**Members:**
+- Thant Thurein Lynn     (Paleon)      -       6805140024
+- Lin Thant Maung        (Voldiel)     -       6805140001
+- Khant Naing Hein       (Jason)       -       6805140019
+- Thant Sin Hein         (Louis)       -       6805140004
+- Zaw Moe Aung           (Zek)         -       6805140020
 ## Part A -- Test types
 
 **Smoke tests** are quick checks that the core features work at all. They run on every push, and a failure means the build is not worth testing further. Examples: a new user can register and log in; a product added to the cart appears in it and checkout returns an order.
