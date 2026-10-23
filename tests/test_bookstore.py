@@ -92,4 +92,17 @@ def test_large_import_reports_correct_count():
     assert imported == total
 
 
+# ======== PERSON 3: users.py regression tests (add below this line only) ========
+
+
+
+# ======== PERSON 2: catalog.py regression tests (add below this line only) ========
+
+
+
+# ======== PERSON 4: cart.py regression tests (add below this line only) ========
+
+
+
 # ---- YOUR SLOW TESTS (at least 2) ----
+# ======== PERSON 2: slow tests (add below this line only) ========
