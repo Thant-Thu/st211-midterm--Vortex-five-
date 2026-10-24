@@ -101,6 +101,20 @@ def test_large_import_reports_correct_count():
 
 
 # ======== PERSON 4: cart.py regression tests (add below this line only) ========
+@pytest.mark.regression
+def test_import_products_returns_correct_count():
+    """Author: Zaw Moe Aung-[6805140020]. Cart.import_products should return the exact number of products imported."""
+    catalog = Catalog()
+    cart = Cart(catalog)
+    products = [
+        (1, "Book A", 10),
+        (2, "Book B", 20),
+    ]
+
+    imported = cart.import_products(products)
+
+    assert len(catalog.products) == 2
+    assert imported == 2
 
 
 
