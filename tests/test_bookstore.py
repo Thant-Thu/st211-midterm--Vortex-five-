@@ -97,6 +97,12 @@ def test_large_import_reports_correct_count():
 
 
 # ======== PERSON 2: catalog.py regression tests (add below this line only) ========
+@pytest.mark.regression
+def test_search_is_case_insensitive():
+    """Author: Thant Thurein Lynn-[6805140024]. Catalog.search should find a title regardless of the keyword's letter case; search("python") must find "Python Basics"."""
+    catalog = Catalog()
+    catalog.add_product(1, "Python Basics", 25)
+    assert catalog.search("python") == [1]
 
 
 
