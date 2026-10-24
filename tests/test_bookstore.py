@@ -116,6 +116,21 @@ def test_import_products_returns_correct_count():
     assert len(catalog.products) == 2
     assert imported == 2
 
+@pytest.mark.regression
+def test_total_includes_last_cart_item():
+    """Author: Zaw Moe Aung-[6605140020]. Cart.total must include the price of every item."""
+    catalog = Catalog()
+    catalog.add_product(1, "Book A", 100)
+    catalog.add_product(2, "Book B", 200)
+    catalog.add_product(3, "Book C", 300)
+
+    cart = Cart(catalog)
+    cart.add(1)
+    cart.add(2)
+    cart.add(3)
+
+    assert cart.total() == 600
+
 
 
 # ---- YOUR SLOW TESTS (at least 2) ----
