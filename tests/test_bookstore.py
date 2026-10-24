@@ -93,6 +93,12 @@ def test_large_import_reports_correct_count():
 
 
 # ======== PERSON 3: users.py regression tests (add below this line only) ========
+@pytest.mark.regression
+def test_checkout_empty_cart_returns_none():
+    """Author: Thant Thurein Lynn-[6805140024]. Cart.checkout on an empty cart should return None and must not record an order."""
+    cart = Cart(Catalog())
+    assert cart.checkout() is None
+    assert cart.history() == []
 
 
 
