@@ -118,7 +118,7 @@ def test_import_products_returns_correct_count():
 
 @pytest.mark.regression
 def test_total_includes_last_cart_item():
-    """Author: Zaw Moe Aung-[6605140020]. Cart.total must include the price of every item."""
+    """Author: Zaw Moe Aung-[6805140020]. Cart.total must include the price of every item."""
     catalog = Catalog()
     catalog.add_product(1, "Book A", 100)
     catalog.add_product(2, "Book B", 200)
