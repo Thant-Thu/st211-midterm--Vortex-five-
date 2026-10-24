@@ -35,7 +35,15 @@ Members: <names>
 
 ## Bug 3
 
-(copy the block above for each additional bug you find)
+- **Module / function:** bookstore_app/catalog.py -> search()
+- **What we suspected and why:** search() is the only function in catalog.py with logic, and its docstring says it returns products whose title contains the keyword, so we suspected it was too strict about what counts as "contains".
+- **What we did:** Added "Python Basics" to a catalog and searched for "Python" and then "python" in the Python shell, then wrote a regression test for the lowercase search.
+- **What we observed (the wrong result):** search("Python") returned [1] but search("python") returned []. The regression test failed with `assert [] == [1]`.
+- **What we expected instead:** A customer typing the keyword in any letter case should find the product, so search("python") should return [1].
+- **The fix we made:** Changed `if keyword in info["title"]` to `if keyword.lower() in info["title"].lower()`.
+- **Author of this finding:** Thant Thurein Lynn-[6805140024]
+
+---
 
 ## Bug 4
 
