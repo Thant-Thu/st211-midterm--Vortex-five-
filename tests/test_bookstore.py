@@ -131,6 +131,14 @@ def test_login_accepts_symbols_only_password():
     assert users.login("zed", "!!!") is True
     assert users.login("zed", "!!") is False
 
+@pytest.mark.smoke
+def test_login_rejects_wrong_password():
+    """Author: Khant Naing Hein-[6805140019]. Smoke: an existing user with a wrong password cannot log in, and an unknown user cannot log in."""
+    users = Users()
+    users.register("amy", "secret1")
+    assert users.login("amy", "other22") is False
+    assert users.login("nobody", "secret1") is False
+
 
 
 # ======== PERSON 2: catalog.py regression tests (add below this line only) ========
