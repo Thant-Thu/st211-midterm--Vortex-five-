@@ -147,3 +147,25 @@ def test_total_includes_last_cart_item():
 
 # ---- YOUR SLOW TESTS (at least 2) ----
 # ======== PERSON 2: slow tests (add below this line only) ========
+@pytest.mark.slow
+def test_catalog_search_with_many_products():
+    """Author: Thant Sin Hein-[6805140004]. Slow: searching a catalog with 300000 products returns the correct single match."""
+    # Slow because: 300,000 add_product calls, then search() lowercases and
+    # scans all 300,000 titles.
+    catalog = Catalog()
+    for i in range(300000):
+        catalog.add_product(i, f"Book {i}", 10)
+    # Hand-computed: "book 299999" appears only in the title "Book 299999".
+    assert catalog.search("Book 299999") == [299999]
+
+
+@pytest.mark.slow
+def test_catalog_repeated_searches():
+    """Author: Thant Sin Hein-[6805140004]. Slow: repeated searches in a large catalog return the correct result every time."""
+    # Slow because: 100 searches x 50,000 titles = 5,000,000 title checks.
+    catalog = Catalog()
+    for i in range(50000):
+        catalog.add_product(i, f"Python Book {i}", 20)
+    # Hand-computed: "python book 49999" matches only "Python Book 49999".
+    for _ in range(100):
+        assert catalog.search("Python Book 49999") == [49999]
