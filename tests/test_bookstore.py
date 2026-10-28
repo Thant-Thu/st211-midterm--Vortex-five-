@@ -123,6 +123,14 @@ def test_login_accepts_password_with_space():
     users.register("lee", "my pass 1")
     assert users.login("lee", "my pass 1") is True
 
+@pytest.mark.regression
+def test_login_accepts_symbols_only_password():
+    """Author: Khant Naing Hein-[6805140019]. Users.login must accept a password made only of symbols, and reject a different symbols-only one."""
+    users = Users()
+    users.register("zed", "!!!")
+    assert users.login("zed", "!!!") is True
+    assert users.login("zed", "!!") is False
+
 
 
 # ======== PERSON 2: catalog.py regression tests (add below this line only) ========
