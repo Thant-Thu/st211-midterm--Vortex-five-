@@ -40,4 +40,5 @@ Problems that only appear with large data, like slow searches or timeouts, go un
 4. Can one test belong to two categories? Give an example.
 Yes. A fast login check is a smoke test, and it could also guard against a bug fixed before, which makes it a regression test. In this project each test gets one marker, so we pick its main purpose.
 5. Bug-finders and bug-fixers are often different people in a real QA team.
-What does that separation change about how a bug report must be written?The fixer wasn’t there when the bug was found, so the report must be self-contained: exact steps to reproduce, the actual result, the expected result and the module involved. A vague note like “search is broken” is not enough.
+   What does that separation change about how a bug report must be written?
+The fixer wasn’t there when the bug was found, so the report must be self-contained: exact steps to reproduce, the actual result, the expected result and the module involved. A vague note like “search is broken” is not enough.
