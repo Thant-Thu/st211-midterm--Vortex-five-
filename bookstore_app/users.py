@@ -11,8 +11,8 @@ class Users:
             return False
         self.users[username] = password
         return True
-
+    
     def login(self, username, password):
-       """Return True if the username exists and the password matches."""
-       stored = self.users.get(username)
-       return stored is not None and stored == password
+        """Return True if the username exists and the password matches."""
+        stored = self.users.get(username)
+        return stored is not None and stored == password
