@@ -101,6 +101,14 @@ def test_checkout_empty_cart_returns_none():
     assert cart.history() == []
 
 
+@pytest.mark.regression
+def test_login_accepts_password_with_symbols():
+    """Author: Khant Naing Hein-[6805140019]. Users.login must accept the exact password the user registered with, including symbols."""
+    users = Users()
+    users.register("sam", "pass@word1")
+    assert users.login("sam", "pass@word1") is True
+
+
 
 # ======== PERSON 2: catalog.py regression tests (add below this line only) ========
 @pytest.mark.regression
