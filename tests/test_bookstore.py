@@ -108,6 +108,14 @@ def test_login_accepts_password_with_symbols():
     users.register("sam", "pass@word1")
     assert users.login("sam", "pass@word1") is True
 
+@pytest.mark.regression
+def test_login_rejects_password_with_extra_symbols():
+    """Author: Khant Naing Hein-[6805140019]. Users.login must reject a wrong password even when it only differs from the real one by extra symbols; "abc123!!" must not log in the user whose password is "abc123"."""
+    users = Users()
+    users.register("kim", "abc123")
+    assert users.login("kim", "abc123!!") is False
+    assert users.login("kim", "abc123") is True
+
 
 
 # ======== PERSON 2: catalog.py regression tests (add below this line only) ========
