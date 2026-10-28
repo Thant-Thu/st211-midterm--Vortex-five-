@@ -116,6 +116,13 @@ def test_login_rejects_password_with_extra_symbols():
     assert users.login("kim", "abc123!!") is False
     assert users.login("kim", "abc123") is True
 
+@pytest.mark.regression
+def test_login_accepts_password_with_space():
+    """Author: Khant Naing Hein-[6805140019]. Users.login must accept a registered password that contains a space; "my pass 1" must log in."""
+    users = Users()
+    users.register("lee", "my pass 1")
+    assert users.login("lee", "my pass 1") is True
+
 
 
 # ======== PERSON 2: catalog.py regression tests (add below this line only) ========
