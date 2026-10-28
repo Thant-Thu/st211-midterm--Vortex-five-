@@ -32,8 +32,12 @@
 
 ## Part F -- Team reflection
 1. Why is running only regression tests before every commit inefficient?
+Regression tests only check bugs we have already fixed. They don’t check that the basic features work or that new code broke something else, so running only them gives a false sense of safety.
 2. Why do smoke tests usually run first in a CI/CD pipeline?
+Smoke tests are fast and cover the most basic features. If one fails, the build is clearly broken, so the pipeline stops early and doesn’t waste time on slower tests.
 3. What risks arise if slow tests are never run?
+Problems that only appear with large data, like slow searches or timeouts, go unnoticed. Our search over 300,000 products takes much longer than over a few, and small tests would never show that.
 4. Can one test belong to two categories? Give an example.
+Yes. A fast login check is a smoke test, and it could also guard against a bug fixed before, which makes it a regression test. In this project each test gets one marker, so we pick its main purpose.
 5. Bug-finders and bug-fixers are often different people in a real QA team.
-   What does that separation change about how a bug report must be written?
+   What does that separation change about how a bug report must be written?The fixer wasn’t there when the bug was found, so the report must be self-contained: exact steps to reproduce, the actual result, the expected result and the module involved. A vague note like “search is broken” is not enough.
