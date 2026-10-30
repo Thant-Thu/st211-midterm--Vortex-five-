@@ -35,7 +35,7 @@ class Cart:
         if not self.items:
            return None
         order = list(self.items)
-        self.orders.append(order)
+        self.orders.append(list(order))
         self.items = []
         return order
 
