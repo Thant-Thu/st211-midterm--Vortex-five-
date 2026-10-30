@@ -4,8 +4,8 @@ Fill in one entry per bug you find, AS YOU FIND IT (before doing the AI
 comparison). Write in your own words, like a detective's notebook. Show the real
 path -- including things you tried that did not work.
 
-Group: <your group name>
-Members: <names>
+Group: Vortex-Five
+Members: Thant Thurein Lynn, Lin Thant Maung, Khant Naing Hein, Thant Sin Hein, Zaw Moe Aung
 
 ---
 
@@ -21,16 +21,13 @@ Members: <names>
 
 ---
 
-## Bug 2
-
-- **Module / function:**
-- **What we suspected and why:**
-- **What we did:**
-- **What we observed (the wrong result):**
-- **What we expected instead:**
-- **The fix we made:**
-- **Author of this finding:**
-
+- **Module / function:** bookstore_app/cart.py -> checkout()
+- **What we suspected and why:** The docstring says checkout() returns the order list, or None if the cart is empty, so we suspected the empty case was not handled.
+- **What we did:** Created a cart with an empty catalog, called checkout() without adding anything, and wrote a regression test for it.
+- **What we observed (the wrong result):** checkout() returned an empty list `[]` instead of None, and the test failed with `assert [] is None`.
+- **What we expected instead:** An empty cart should return None, and no empty order should be recorded in the history.
+- **The fix we made:** Added `if not self.items: return None` at the start of checkout().
+- **Author of this finding:** Thant Thurein Lynn-[6805140024]
 ---
 
 ## Bug 3
