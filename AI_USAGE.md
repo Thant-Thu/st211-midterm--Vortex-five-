@@ -674,9 +674,7 @@ Four questions. Be specific and cite your own table.
    crashes?** A crashing test gets attention. Say what happens to the other
    kind.
    A failing test attracts attention, but a test that passes against buggy code creates false confidence. Developers may assume the feature is properly tested even though the test never exposes the defect. For example, test_search_finds_exact_title passed on both versions but did not detect our case-sensitive search bug.
-3. **Did the supplied set catch anything you had missed?** If yes, what, and
-   what would have led you to it. If no, say so — that is a legitimate answer
-   and does not cost marks.
+3. **Did the supplied set catch anything you had missed?**    No. The only bug the supplied tests detected that was not in our first FINDINGS draft was the empty-cart checkout, and we had already found it ourselves: we committed our own failing test (`099de48`) and fix (`babcc01`) for it before the audit, and it is recorded as Bug 2. `test_checkout_empty_returns_none` failed on shipped code and passed on fixed code, so it is a genuine detection, but it confirmed a bug we already had and did not reveal a new one. We found each of our bugs by reading the docstrings and trying odd inputs.
    The supplied set caught the empty-checkout behavior problem through test_checkout_empty_returns_none. This issue was not recorded in the completed entries of our FINDINGS.md. The test failed against shipped code and passed against fixed code, demonstrating a genuine detection.
 4. **What will you check before trusting a generated test in future?** Name
    checks you actually performed in this exercise, not general principles.

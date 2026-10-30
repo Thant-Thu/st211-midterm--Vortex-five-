@@ -4,33 +4,28 @@ Fill in one entry per bug you find, AS YOU FIND IT (before doing the AI
 comparison). Write in your own words, like a detective's notebook. Show the real
 path -- including things you tried that did not work.
 
-Group: <your group name>
-Members: <names>
+Group: Vortex-Five
+Members: Thant Thurein Lynn, Lin Thant Maung, Khant Naing Hein, Thant Sin Hein, Zaw Moe Aung
 
 ---
 
-## Bug 1
-
-- **Module / function:** <e.g. cart.py -> total()>
-- **What we suspected and why:** <what made you look here?>
-- **What we did:** <the input or test you tried>
-- **What we observed (the wrong result):** <actual output>
-- **What we expected instead:** <correct behaviour>
-- **The fix we made:** <what you changed>
-- **Author of this finding:** <name>
+- **Module / function:** bookstore_app/users.py -> login()
+- **What we suspected and why:** register() stores the password exactly as given, so a user should be able to log in with the same password. We suspected login() changed the password before comparing it.
+- **What we did:** Registered a user with the password `pass@word1`, then logged in with the same password, and wrote a regression test for it.
+- **What we observed (the wrong result):** login() returned False for the correct password. The regression test failed with `AssertionError: assert False is True`.
+- **What we expected instead:** A user must be able to log in with exactly the password they registered, including symbols, so login() should return True.
+- **The fix we made:** Removed the `cleaned` line that stripped non-alphanumeric characters from the typed password, and compared the password as typed (`stored == password`).
+- **Author of this finding:** Thant Thurein Lynn-[6805140024], with advice from Khant Naing Hein-[6805140019]
 
 ---
 
-## Bug 2
-
-- **Module / function:**
-- **What we suspected and why:**
-- **What we did:**
-- **What we observed (the wrong result):**
-- **What we expected instead:**
-- **The fix we made:**
-- **Author of this finding:**
-
+- **Module / function:** bookstore_app/cart.py -> checkout()
+- **What we suspected and why:** The docstring says checkout() returns the order list, or None if the cart is empty, so we suspected the empty case was not handled.
+- **What we did:** Created a cart with an empty catalog, called checkout() without adding anything, and wrote a regression test for it.
+- **What we observed (the wrong result):** checkout() returned an empty list `[]` instead of None, and the test failed with `assert [] is None`.
+- **What we expected instead:** An empty cart should return None, and no empty order should be recorded in the history.
+- **The fix we made:** Added `if not self.items: return None` at the start of checkout().
+- **Author of this finding:** Thant Thurein Lynn-[6805140024]
 ---
 
 ## Bug 3

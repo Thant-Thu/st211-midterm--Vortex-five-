@@ -100,10 +100,21 @@ def test_checkout_empty_cart_returns_none():
     assert cart.checkout() is None
     assert cart.history() == []
 
+@pytest.mark.regression
+def test_checkout_order_is_independent_of_history():
+    """Author: Thant Thurein Lynn-[6805140024]. Cart.checkout returns the placed order; changing the returned list afterwards must not change the recorded order history."""
+    catalog = Catalog()
+    catalog.add_product(1, "Book A", 10)
+    cart = Cart(catalog)
+    cart.add(1)
+    order = cart.checkout()
+    order.append(99)
+    assert cart.history() == [[1]]
+
 
 @pytest.mark.regression
 def test_login_accepts_password_with_symbols():
-    """Author: Khant Naing Hein-[6805140019]. Users.login must accept the exact password the user registered with, including symbols."""
+    """Author: Thant Thurein Lynn-[6805140024], with advice from Khant Naing Hein-[6805140019]. Users.login must accept the exact password the user registered with, including symbols."""
     users = Users()
     users.register("sam", "pass@word1")
     assert users.login("sam", "pass@word1") is True
