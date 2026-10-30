@@ -7,7 +7,7 @@ path -- including things you tried that did not work.
 Group: Vortex-Five
 Members: Thant Thurein Lynn, Lin Thant Maung, Khant Naing Hein, Thant Sin Hein, Zaw Moe Aung
 
----
+## Bug 1
 
 - **Module / function:** bookstore_app/users.py -> login()
 - **What we suspected and why:** register() stores the password exactly as given, so a user should be able to log in with the same password. We suspected login() changed the password before comparing it.
@@ -19,13 +19,16 @@ Members: Thant Thurein Lynn, Lin Thant Maung, Khant Naing Hein, Thant Sin Hein, 
 
 ---
 
-- **Module / function:** bookstore_app/cart.py -> checkout()
-- **What we suspected and why:** The docstring says checkout() returns the order list, or None if the cart is empty, so we suspected the empty case was not handled.
-- **What we did:** Created a cart with an empty catalog, called checkout() without adding anything, and wrote a regression test for it.
-- **What we observed (the wrong result):** checkout() returned an empty list `[]` instead of None, and the test failed with `assert [] is None`.
-- **What we expected instead:** An empty cart should return None, and no empty order should be recorded in the history.
-- **The fix we made:** Added `if not self.items: return None` at the start of checkout().
+## Bug 2
+
+- **Module / function:** bookstore_app/cart.py -> checkout() (two defects in the same function)
+- **What we suspected and why:** The docstring says checkout() returns the order list, or None if the cart is empty, so we suspected the empty case was not handled. While testing it, we also checked whether the returned order is kept safely in the history.
+- **What we did:** Created a cart with an empty catalog and called checkout() without adding anything. Then added one product, checked out, appended `99` to the returned order, and printed history(). We wrote a regression test for each case.
+- **What we observed (the wrong result):** (a) An empty cart returned `[]` instead of None; the test failed with `assert [] is None`. (b) The original code stored the same list it returned (`self.orders.append(order)`), so after `order.append(99)` history() showed `[[1, 99]]` instead of `[[1]]`.
+- **What we expected instead:** (a) An empty cart should return None, and no empty order should be recorded. (b) The recorded history should not change when the caller edits the returned order, so history() should still be `[[1]]`.
+- **The fix we made:** Added `if not self.items: return None` at the start of checkout(), and changed the history line to store a copy: `self.orders.append(list(order))`.
 - **Author of this finding:** Thant Thurein Lynn-[6805140024]
+
 ---
 
 ## Bug 3
