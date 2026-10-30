@@ -612,19 +612,20 @@ One row per bug recorded in `FINDINGS.md`.
 
 | Bug (your description) | We found it | The supplied set catches it | Which test, and how you established that |
 |---|---|---|---|
-| `users.py → login()`: non-alphanumeric characters were removed from passwords (Bug 1). | Yes | No | `test_login_rejects_wrong_password` passed on both versions; its test password did not expose the punctuation-cleaning bug. |
-| `cart.py → checkout()`: checking out an empty cart returned `[]` instead of `None` (Bug 2). | Yes | Yes | `test_checkout_empty_returns_none` failed on shipped code and passed on fixed code. |
+| `users.py → login()`: non-alphanumeric characters were removed from the typed password, so correct passwords with symbols were rejected and wrong ones with extra symbols were accepted (Bug 1). | Yes | No | `test_login_rejects_wrong_password` passed on both versions; its wrong password (`wrongpw`) contains no punctuation, so it never exercised the bug. |
+| `cart.py → checkout()`: checking out an empty cart returned `[]` instead of `None`, and the original code stored the same list it returned, so editing the returned order also changed the order history (Bug 2). | Yes | Partly | `test_checkout_empty_returns_none` failed on shipped code and passed on fixed code, so it catches the empty-cart part. No test in the supplied set changes the returned order and then checks `history()`, so the history-aliasing part is not caught. |
 | `catalog.py → search()`: searching with different capitalization returned no results (Bug 3). | Yes | No | `test_search_finds_exact_title` passed on both versions because it searched using exact capitalization. |
 | `cart.py → import_products()`: the import count was one higher than the number of products imported (Bug 4). | Yes | Yes | `test_import_returns_count` failed on shipped code and passed on fixed code. |
 | `cart.py → total()`: the last item was skipped (Bug 5). | Yes | Yes | `test_cart_total_sums_items` failed on shipped code and passed on fixed code. |
 
-Every "yes" in the third column points to a test classified as a genuine detection in Part 2.
+Every "Yes" in the third column points to a test classified as a genuine detection in Part 2. The "Partly" in the Bug 2 row means the supplied set catches only the empty-cart half of that bug.
 
 ---
 
+
 ## Part 4 — Verdict (4 marks, 400 words maximum)
 
-1. **Which failure mode was most common?**
+1. **Which failure mode was most common in the supplied set? Give the count.**
 
    "Detects nothing" was the most common verdict, with 4 out of 8 tests. These tests passed on both shipped and fixed code and therefore did not demonstrate that they could detect a defect.
 
