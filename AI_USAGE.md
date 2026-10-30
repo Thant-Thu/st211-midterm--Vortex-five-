@@ -43,7 +43,7 @@ If no AI tools were used anywhere, write this instead of the table:
 
 ## Part 2 — Audit of the supplied test set (16 marks)
 
-`ai_review/test_ai_suggested.py` contains eight tests presented as a finished
+`ai_review/test_ai_generated.py` contains eight tests presented as a finished
 AI bug hunt for this bookstore. They are confident and they are not all
 correct. Your job is to establish, for each one, what it actually does.
 
@@ -74,12 +74,12 @@ the shipped state with git:
 
 ```bash
 # your fixed code
-pytest ai_review/test_ai_suggested.py -v | tee /tmp/fixed.txt
+pytest ai_review/test_ai_generated.py -v | tee /tmp/fixed.txt
 
 # the code as it was shipped (replace <sha> with your first commit)
 git stash
 git checkout <sha> -- bookstore_app/
-pytest ai_review/test_ai_suggested.py -v | tee /tmp/shipped.txt
+pytest ai_review/test_ai_generated.py -v | tee /tmp/shipped.txt
 git checkout HEAD -- bookstore_app/
 git stash pop
 ```
@@ -118,7 +118,7 @@ and line instead.
 
 ---
 
-#### Test1: `test_<function_name>`  (`ai_review/test_ai_suggested.py:<line>`)
+#### Test 1: `test_cart_total_sums_items` (`ai_review/test_ai_generated.py:16`)
 
 **Audited by:** Lin Thant Maung
 
