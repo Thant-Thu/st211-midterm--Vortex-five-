@@ -38,7 +38,7 @@ Smoke tests are fast and cover the most basic features. If one fails, the build 
 3. What risks arise if slow tests are never run?
 Problems that only appear with large data, like slow searches or timeouts, go unnoticed. Our search over 300,000 products takes much longer than over a few, and small tests would never show that.
 4. Can one test belong to two categories? Give an example.
-Yes. A fast login check is a smoke test, and it could also guard against a bug fixed before, which makes it a regression test. In this project each test gets one marker, so we pick its main purpose.
+Yes. A test can have more than one marker when it serves multiple purposes. In our project, `test_large_import_reports_correct_count` has both `regression` and `slow` markers. It checks that the large-import count remains correct while also identifying a test that takes longer to run.
 5. Bug-finders and bug-fixers are often different people in a real QA team.
    What does that separation change about how a bug report must be written?
 The fixer wasn’t there when the bug was found, so the report must be self-contained: exact steps to reproduce, the actual result, the expected result and the module involved. A vague note like “search is broken” is not enough.
