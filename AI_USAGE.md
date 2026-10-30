@@ -101,13 +101,13 @@ leaving the row blank. Check before you write.
 
 | # | Test | What it claims to catch | Shipped | Fixed | Verdict | Auditor |
 |---|---|---|---|---|---|---|
-| 1 | `test_cart_total_sums_items` | Incorrect cart total | FAIL | PASS | Genuine detection | [Member who verified] |
-| 2 |`test_login_rejects_wrong_password` | Login accepting an incorrect password | PASS | PASS | Detects nothing | [Member who verified] |
-| 3 |`test_search_finds_exact_title` | Product search finding a matching title | PASS | PASS | Detects nothing | [Member who verified] |
-| 4 |`test_import_returns_count` | Incorrect bulk-import count | FAIL | PASS | Genuine detection | [Member who verified] |
-| 5 |`test_register_duplicate_returns_false` | Duplicate registration being accepted | PASS | PASS | Detects nothing | [Member who verified] |
-| 6 |`test_checkout_empty_returns_none` | Incorrect result when checking out an empty cart | FAIL | PASS | Genuine detection | [Member who verified] |
-| 7 |`test_add_to_cart_returns_true_for_known_product` | Adding a known product to the cart | PASS | PASS | Detects nothing | [Member who verified] |
+| 1 | `test_cart_total_sums_items` | Incorrect cart total | FAIL | PASS | Genuine detection | Lin Thant Maung |
+| 2 |`test_login_rejects_wrong_password` | Login accepting an incorrect password | PASS | PASS | Detects nothing | Lin Thant Maung |
+| 3 |`test_search_finds_exact_title` | Product search finding a matching title | PASS | PASS | Detects nothing | Lin Thant Maung |
+| 4 |`test_import_returns_count` | Incorrect bulk-import count | FAIL | PASS | Genuine detection | Lin Thant Maung |
+| 5 |`test_register_duplicate_returns_false` | Duplicate registration being accepted | PASS | PASS | Detects nothing | Lin Thant Maung |
+| 6 |`test_checkout_empty_returns_none` | Incorrect result when checking out an empty cart | FAIL | PASS | Genuine detection | Lin Thant Maung |
+| 7 |`test_add_to_cart_returns_true_for_known_product` | Adding a known product to the cart | PASS | PASS | Detects nothing | Lin Thant Maung |
 | 8 | `test_search_is_limited_to_ten_results` | Search returning no more than ten results | FAIL | FAIL | Invented requirement | Lin Thant Maung |
 
 ### Detail entries
@@ -129,7 +129,7 @@ This test checks whether the shopping cart correctly adds together the prices of
 **2. Evidence — against the shipped code**
 
 ```text
-<============================= test session starts ==============================
+============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
 rootdir: /private/tmp/vortex-shipped
@@ -148,18 +148,18 @@ __________________________ test_cart_total_sums_items __________________________
 >       assert c.total() == 30
 E       assert 10 == 30
 E        +  where 10 = total()
-E        +    where total = <bookstore_app.cart.Cart object at 0x10634e270>.total
+E        +    where total = <bookstore_app.cart.Cart object at 0x1048aa270>.total
 
 ai_review/test_ai_generated.py:16: AssertionError
 =========================== short test summary info ============================
 FAILED ai_review/test_ai_generated.py::test_cart_total_sums_items - assert 10...
-============================== 1 failed in 0.02s ===============================>
+============================== 1 failed in 0.02s ===============================
 ```
 
 **3. Evidence — against your fixed code**
 
 ```text
-<============================= test session starts ==============================
+============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
 rootdir: /Users/lynnheinkhant/Documents/GitHub/st211-midterm--Vortex-Five-
@@ -168,7 +168,7 @@ collecting ... collected 1 item
 
 ai_review/test_ai_generated.py::test_cart_total_sums_items PASSED        [100%]
 
-============================== 1 passed in 0.02s ===============================>
+============================== 1 passed in 0.01s ===============================
 ```
 
 **4. What that pair proves.** Name the row of the classification table you
@@ -197,36 +197,22 @@ This test checks whether the login system rejects an incorrect password instead 
 
 **2. Evidence — against the shipped code**
 
-lynnheinkhant@lynns-MacBook-Pro st211-midterm--Vortex-Five- % cd /tmp/vortex-shipped
-pytest ai_review/test_ai_generated.py::test_login_rejects_wrong_password -v 2>&1 | tee /tmp/shipped_test_test_login_rejects_wrong_password.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
 rootdir: /private/tmp/vortex-shipped
 configfile: pytest.ini
-collecting ... ERROR: found no collectors for /private/tmp/vortex-shipped/ai_review/test_ai_generated.py::test_login_rejects_wrong_password
+collecting ... collected 1 item
 
-collected 0 items / 1 error
+ai_review/test_ai_generated.py::test_login_rejects_wrong_password PASSED [100%]
 
-==================================== ERRORS ====================================
-_______________ ERROR collecting ai_review/test_ai_generated.py ________________
-ImportError while importing test module '/private/tmp/vortex-shipped/ai_review/test_ai_generated.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py:88: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ai_review/test_ai_generated.py:9: in <module>
-    from bookstore_app import Users, Catalog, Cart
-E   ModuleNotFoundError: No module named 'bookstore_app'
-=========================== short test summary info ============================
-ERROR ai_review/test_ai_generated.py
-=============================== 1 error in 0.02s ===============================
+============================== 1 passed in 0.01s ===============================
+```
 
 **3. Evidence — against your fixed code**
 
-lynnheinkhant@lynns-MacBook-Pro vortex-shipped % cd ~/Documents/GitHub/st211-midterm--Vortex-Five-
-pytest ai_review/test_ai_generated.py::test_login_rejects_wrong_password -v 2>&1 | tee /tmp/fixed_test_test_login_rejects_wrong_password.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
@@ -236,7 +222,8 @@ collecting ... collected 1 item
 
 ai_review/test_ai_generated.py::test_login_rejects_wrong_password PASSED [100%]
 
-============================== 1 passed in 0.02s ===============================
+============================== 1 passed in 0.01s ===============================
+```
 
 **4. What that pair proves.**
 
@@ -261,36 +248,22 @@ This test checks whether the catalog search function can find a product when the
 
 **2. Evidence — against the shipped code**
 
-lynnheinkhant@lynns-MacBook-Pro st211-midterm--Vortex-Five- % cd /tmp/vortex-shipped
-pytest ai_review/test_ai_generated.py::test_search_finds_exact_title -v 2>&1 | tee /tmp/shipped_test_test_search_finds_exact_title.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
 rootdir: /private/tmp/vortex-shipped
 configfile: pytest.ini
-collecting ... ERROR: found no collectors for /private/tmp/vortex-shipped/ai_review/test_ai_generated.py::test_search_finds_exact_title
+collecting ... collected 1 item
 
-collected 0 items / 1 error
+ai_review/test_ai_generated.py::test_search_finds_exact_title PASSED     [100%]
 
-==================================== ERRORS ====================================
-_______________ ERROR collecting ai_review/test_ai_generated.py ________________
-ImportError while importing test module '/private/tmp/vortex-shipped/ai_review/test_ai_generated.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py:88: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ai_review/test_ai_generated.py:9: in <module>
-    from bookstore_app import Users, Catalog, Cart
-E   ModuleNotFoundError: No module named 'bookstore_app'
-=========================== short test summary info ============================
-ERROR ai_review/test_ai_generated.py
-=============================== 1 error in 0.02s ===============================
+============================== 1 passed in 0.01s ===============================
+```
 
 **3. Evidence — against your fixed code**
 
-lynnheinkhant@lynns-MacBook-Pro vortex-shipped % cd ~/Documents/GitHub/st211-midterm--Vortex-Five-
-pytest ai_review/test_ai_generated.py::test_search_finds_exact_title -v 2>&1 | tee /tmp/fixed_test_test_search_finds_exact_title.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
@@ -300,7 +273,8 @@ collecting ... collected 1 item
 
 ai_review/test_ai_generated.py::test_search_finds_exact_title PASSED     [100%]
 
-============================== 1 passed in 0.02s ===============================
+============================== 1 passed in 0.01s ===============================
+```
 
 **4. What that pair proves.**
 
@@ -325,36 +299,36 @@ This test checks whether the product-import function returns the correct number 
 
 **2. Evidence — against the shipped code**
 
-lynnheinkhant@lynns-MacBook-Pro st211-midterm--Vortex-Five- % cd /tmp/vortex-shipped
-pytest ai_review/test_ai_generated.py::test_import_returns_count -v 2>&1 | tee /tmp/shipped_test_test_import_returns_count.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
 rootdir: /private/tmp/vortex-shipped
 configfile: pytest.ini
-collecting ... ERROR: found no collectors for /private/tmp/vortex-shipped/ai_review/test_ai_generated.py::test_import_returns_count
+collecting ... collected 1 item
 
-collected 0 items / 1 error
+ai_review/test_ai_generated.py::test_import_returns_count FAILED         [100%]
 
-==================================== ERRORS ====================================
-_______________ ERROR collecting ai_review/test_ai_generated.py ________________
-ImportError while importing test module '/private/tmp/vortex-shipped/ai_review/test_ai_generated.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py:88: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ai_review/test_ai_generated.py:9: in <module>
-    from bookstore_app import Users, Catalog, Cart
-E   ModuleNotFoundError: No module named 'bookstore_app'
+=================================== FAILURES ===================================
+__________________________ test_import_returns_count ___________________________
+
+    def test_import_returns_count():
+        """Claims to check the bulk-import count."""
+        c = Cart(Catalog())
+>       assert c.import_products([(1, "A", 5), (2, "B", 6)]) == 2
+E       AssertionError: assert 3 == 2
+E        +  where 3 = import_products([(1, 'A', 5), (2, 'B', 6)])
+E        +    where import_products = <bookstore_app.cart.Cart object at 0x1045f2270>.import_products
+
+ai_review/test_ai_generated.py:34: AssertionError
 =========================== short test summary info ============================
-ERROR ai_review/test_ai_generated.py
-=============================== 1 error in 0.02s ===============================
+FAILED ai_review/test_ai_generated.py::test_import_returns_count - AssertionE...
+============================== 1 failed in 0.02s ===============================
+```
 
 **3. Evidence — against your fixed code**
 
-lynnheinkhant@lynns-MacBook-Pro vortex-shipped % cd ~/Documents/GitHub/st211-midterm--Vortex-Five-
-pytest ai_review/test_ai_generated.py::test_import_returns_count -v 2>&1 | tee /tmp/fixed_test_test_import_returns_count.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
@@ -365,6 +339,7 @@ collecting ... collected 1 item
 ai_review/test_ai_generated.py::test_import_returns_count PASSED         [100%]
 
 ============================== 1 passed in 0.01s ===============================
+```
 
 **4. What that pair proves.**
 
@@ -389,36 +364,22 @@ This test checks whether the registration system rejects an attempt to register 
 
 **2. Evidence — against the shipped code**
 
-lynnheinkhant@lynns-MacBook-Pro st211-midterm--Vortex-Five- % cd /tmp/vortex-shipped
-pytest ai_review/test_ai_generated.py::test_register_duplicate_returns_false -v 2>&1 | tee /tmp/shipped_test_test_register_duplicate_returns_false.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
 rootdir: /private/tmp/vortex-shipped
 configfile: pytest.ini
-collecting ... ERROR: found no collectors for /private/tmp/vortex-shipped/ai_review/test_ai_generated.py::test_register_duplicate_returns_false
+collecting ... collected 1 item
 
-collected 0 items / 1 error
+ai_review/test_ai_generated.py::test_register_duplicate_returns_false PASSED [100%]
 
-==================================== ERRORS ====================================
-_______________ ERROR collecting ai_review/test_ai_generated.py ________________
-ImportError while importing test module '/private/tmp/vortex-shipped/ai_review/test_ai_generated.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py:88: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ai_review/test_ai_generated.py:9: in <module>
-    from bookstore_app import Users, Catalog, Cart
-E   ModuleNotFoundError: No module named 'bookstore_app'
-=========================== short test summary info ============================
-ERROR ai_review/test_ai_generated.py
-=============================== 1 error in 0.02s ===============================
+============================== 1 passed in 0.01s ===============================
+```
 
 **3. Evidence — against your fixed code**
 
-lynnheinkhant@lynns-MacBook-Pro vortex-shipped % cd ~/Documents/GitHub/st211-midterm--Vortex-Five-
-pytest ai_review/test_ai_generated.py::test_register_duplicate_returns_false -v 2>&1 | tee /tmp/fixed_test_test_register_duplicate_returns_false.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
@@ -428,7 +389,8 @@ collecting ... collected 1 item
 
 ai_review/test_ai_generated.py::test_register_duplicate_returns_false PASSED [100%]
 
-============================== 1 passed in 0.02s ===============================
+============================== 1 passed in 0.01s ===============================
+```
 
 **4. What that pair proves.**
 
@@ -453,42 +415,48 @@ This test checks whether checking out an empty shopping cart returns `None` inst
 
 **2. Evidence — against the shipped code**
 
-lynnheinkhant@lynns-MacBook-Pro st211-midterm--Vortex-Five- % cd /tmp/vortex-shipped
-pytest ai_review/test_ai_generated.py::test_checkout_empty_returns_none -v 2>&1 | tee /tmp/shipped_test_test_checkout_empty_returns_none.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
 rootdir: /private/tmp/vortex-shipped
 configfile: pytest.ini
-collecting ... ERROR: found no collectors for /private/tmp/vortex-shipped/ai_review/test_ai_generated.py::test_checkout_empty_returns_none
+collecting ... collected 1 item
 
-collected 0 items / 1 error
+ai_review/test_ai_generated.py::test_checkout_empty_returns_none FAILED  [100%]
 
-==================================== ERRORS ====================================
-_______________ ERROR collecting ai_review/test_ai_generated.py ________________
-ImportError while importing test module '/private/tmp/vortex-shipped/ai_review/test_ai_generated.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py:88: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ai_review/test_ai_generated.py:9: in <module>
-    from bookstore_app import Users, Catalog, Cart
-E   ModuleNotFoundError: No module named 'bookstore_app'
+=================================== FAILURES ===================================
+_______________________ test_checkout_empty_returns_none _______________________
+
+    def test_checkout_empty_returns_none():
+        """Claims to check that checking out an empty cart returns None."""
+>       assert Cart(Catalog()).checkout() is None
+E       assert [] is None
+E        +  where [] = checkout()
+E        +    where checkout = <bookstore_app.cart.Cart object at 0x102026270>.checkout
+E        +      where <bookstore_app.cart.Cart object at 0x102026270> = Cart(<bookstore_app.catalog.Catalog object at 0x102025fd0>)
+E        +        where <bookstore_app.catalog.Catalog object at 0x102025fd0> = Catalog()
+
+ai_review/test_ai_generated.py:45: AssertionError
 =========================== short test summary info ============================
-ERROR ai_review/test_ai_generated.py
-=============================== 1 error in 0.02s ===============================
+FAILED ai_review/test_ai_generated.py::test_checkout_empty_returns_none - ass...
+============================== 1 failed in 0.02s ===============================
+```
 
 **3. Evidence — against your fixed code**
 
-lynnheinkhant@lynns-MacBook-Pro vortex-shipped % cd ~/Documents/GitHub/st211-midterm--Vortex-Five-
-pytest ai_review/test_ai_generated.py::test_checkout_empty_returns_none -v 2>&1 | tee /tmp/fixed_test_test_checkout_empty_returns_none.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
 rootdir: /Users/lynnheinkhant/Documents/GitHub/st211-midterm--Vortex-Five-
 configfile: pytest.ini
 collecting ... collected 1 item
+
+ai_review/test_ai_generated.py::test_checkout_empty_returns_none PASSED  [100%]
+
+============================== 1 passed in 0.01s ===============================
+```
 
 **4. What that pair proves.**
 
@@ -513,36 +481,22 @@ This test checks whether adding an existing product to the shopping cart succeed
 
 **2. Evidence — against the shipped code**
 
-lynnheinkhant@lynns-MacBook-Pro st211-midterm--Vortex-Five- % cd /tmp/vortex-shipped
-pytest ai_review/test_ai_generated.py::test_add_to_cart_returns_true_for_known_product -v 2>&1 | tee /tmp/shipped_test_test_add_to_cart_returns_true_for_known_product.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
 rootdir: /private/tmp/vortex-shipped
 configfile: pytest.ini
-collecting ... ERROR: found no collectors for /private/tmp/vortex-shipped/ai_review/test_ai_generated.py::test_add_to_cart_returns_true_for_known_product
+collecting ... collected 1 item
 
-collected 0 items / 1 error
+ai_review/test_ai_generated.py::test_add_to_cart_returns_true_for_known_product PASSED [100%]
 
-==================================== ERRORS ====================================
-_______________ ERROR collecting ai_review/test_ai_generated.py ________________
-ImportError while importing test module '/private/tmp/vortex-shipped/ai_review/test_ai_generated.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py:88: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ai_review/test_ai_generated.py:9: in <module>
-    from bookstore_app import Users, Catalog, Cart
-E   ModuleNotFoundError: No module named 'bookstore_app'
-=========================== short test summary info ============================
-ERROR ai_review/test_ai_generated.py
-=============================== 1 error in 0.02s ===============================
+============================== 1 passed in 0.01s ===============================
+```
 
 **3. Evidence — against your fixed code**
 
-lynnheinkhant@lynns-MacBook-Pro vortex-shipped % cd ~/Documents/GitHub/st211-midterm--Vortex-Five-
-pytest ai_review/test_ai_generated.py::test_add_to_cart_returns_true_for_known_product -v 2>&1 | tee /tmp/fixed_test_test_add_to_cart_returns_true_for_known_product.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
@@ -553,6 +507,7 @@ collecting ... collected 1 item
 ai_review/test_ai_generated.py::test_add_to_cart_returns_true_for_known_product PASSED [100%]
 
 ============================== 1 passed in 0.01s ===============================
+```
 
 **4. What that pair proves.**
 
@@ -577,36 +532,39 @@ This test checks whether the search function limits its results to a maximum of 
 
 **2. Evidence — against the shipped code**
 
-lynnheinkhant@lynns-MacBook-Pro st211-midterm--Vortex-Five- % cd /tmp/vortex-shipped
-pytest ai_review/test_ai_generated.py::test_search_is_limited_to_ten_results -v 2>&1 | tee /tmp/shipped_test_test_search_is_limited_to_ten_results.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
 rootdir: /private/tmp/vortex-shipped
 configfile: pytest.ini
-collecting ... ERROR: found no collectors for /private/tmp/vortex-shipped/ai_review/test_ai_generated.py::test_search_is_limited_to_ten_results
+collecting ... collected 1 item
 
-collected 0 items / 1 error
+ai_review/test_ai_generated.py::test_search_is_limited_to_ten_results FAILED [100%]
 
-==================================== ERRORS ====================================
-_______________ ERROR collecting ai_review/test_ai_generated.py ________________
-ImportError while importing test module '/private/tmp/vortex-shipped/ai_review/test_ai_generated.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py:88: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ai_review/test_ai_generated.py:9: in <module>
-    from bookstore_app import Users, Catalog, Cart
-E   ModuleNotFoundError: No module named 'bookstore_app'
+=================================== FAILURES ===================================
+____________________ test_search_is_limited_to_ten_results _____________________
+
+    def test_search_is_limited_to_ten_results():
+        """Claims the catalogue search returns at most ten results."""
+        cat = Catalog()
+        for i in range(20):
+            cat.add_product(i, "match", 1)
+>       assert len(cat.search("match")) <= 10
+E       AssertionError: assert 20 <= 10
+E        +  where 20 = len([0, 1, 2, 3, 4, 5, ...])
+E        +    where [0, 1, 2, 3, 4, 5, ...] = search('match')
+E        +      where search = <bookstore_app.catalog.Catalog object at 0x103f81fd0>.search
+
+ai_review/test_ai_generated.py:60: AssertionError
 =========================== short test summary info ============================
-ERROR ai_review/test_ai_generated.py
-=============================== 1 error in 0.02s ===============================
+FAILED ai_review/test_ai_generated.py::test_search_is_limited_to_ten_results
+============================== 1 failed in 0.02s ===============================
+```
 
 **3. Evidence — against your fixed code**
 
-lynnheinkhant@lynns-MacBook-Pro vortex-shipped % cd ~/Documents/GitHub/st211-midterm--Vortex-Five-
-pytest ai_review/test_ai_generated.py::test_search_is_limited_to_ten_results -v 2>&1 | tee /tmp/fixed_test_test_search_is_limited_to_ten_results.txt
+```text
 ============================= test session starts ==============================
 platform darwin -- Python 3.13.3, pytest-9.1.1, pluggy-1.7.0 -- /Library/Frameworks/Python.framework/Versions/3.13/bin/python3
 cachedir: .pytest_cache
@@ -628,12 +586,13 @@ ____________________ test_search_is_limited_to_ten_results _____________________
 E       AssertionError: assert 20 <= 10
 E        +  where 20 = len([0, 1, 2, 3, 4, 5, ...])
 E        +    where [0, 1, 2, 3, 4, 5, ...] = search('match')
-E        +      where search = <bookstore_app.catalog.Catalog object at 0x105ece120>.search
+E        +      where search = <bookstore_app.catalog.Catalog object at 0x104029fd0>.search
 
 ai_review/test_ai_generated.py:60: AssertionError
 =========================== short test summary info ============================
 FAILED ai_review/test_ai_generated.py::test_search_is_limited_to_ten_results
-============================== 1 failed in 0.03s ===============================
+============================== 1 failed in 0.02s ===============================
+```
 
 **4. What that pair proves.**
 
@@ -649,39 +608,37 @@ Classification: Invented requirement — FAIL then FAIL. Both the shipped and fi
 
 ## Part 3 — Coverage against your own bug hunt
 
-One row per bug you recorded in `FINDINGS.md`, plus a row for any bug the
-supplied set caught that you had not found yourself.
+One row per bug recorded in `FINDINGS.md`.
 
 | Bug (your description) | We found it | The supplied set catches it | Which test, and how you established that |
 |---|---|---|---|
-| `cart.py → total()`: the last item was skipped (Bug 5). | Yes | Yes | `test_cart_total_sums_items` failed on shipped code and passed on fixed code. |
-| `cart.py → import_products()`: the import count was one higher than the number of products imported (Bug 4). | Yes | Yes | `test_import_returns_count` failed on shipped code and passed on fixed code. |
+| `users.py → login()`: non-alphanumeric characters were removed from passwords (Bug 1). | Yes | No | `test_login_rejects_wrong_password` passed on both versions; its test password did not expose the punctuation-cleaning bug. |
+| `cart.py → checkout()`: checking out an empty cart returned `[]` instead of `None` (Bug 2). | Yes | Yes | `test_checkout_empty_returns_none` failed on shipped code and passed on fixed code. |
 | `catalog.py → search()`: searching with different capitalization returned no results (Bug 3). | Yes | No | `test_search_finds_exact_title` passed on both versions because it searched using exact capitalization. |
-| Empty-cart checkout returned the wrong result; this was not recorded in the completed findings. | No | Yes | `test_checkout_empty_returns_none` failed on shipped code and passed on fixed code. |
+| `cart.py → import_products()`: the import count was one higher than the number of products imported (Bug 4). | Yes | Yes | `test_import_returns_count` failed on shipped code and passed on fixed code. |
+| `cart.py → total()`: the last item was skipped (Bug 5). | Yes | Yes | `test_cart_total_sums_items` failed on shipped code and passed on fixed code. |
 
-This is a factual cross-reference, not an opinion. Every "yes" in the third
-column must point at a test you classified as a genuine detection in Part 2.
+Every "yes" in the third column points to a test classified as a genuine detection in Part 2.
 
 ---
 
 ## Part 4 — Verdict (4 marks, 400 words maximum)
 
-Four questions. Be specific and cite your own table.
+1. **Which failure mode was most common?**
 
-1. **Which failure mode was most common** in the supplied set? Give the count
-   “Detects nothing” was the most common verdict, with 4 out of 8 tests. These tests passed on both shipped and fixed code and therefore did not demonstrate that they could detect a defect.
-2. **Why is a test that passes against buggy code more dangerous than one that
-   crashes?** A crashing test gets attention. Say what happens to the other
-   kind.
-   A failing test attracts attention, but a test that passes against buggy code creates false confidence. Developers may assume the feature is properly tested even though the test never exposes the defect. For example, test_search_finds_exact_title passed on both versions but did not detect our case-sensitive search bug.
-3. **Did the supplied set catch anything you had missed?**    No. The only bug the supplied tests detected that was not in our first FINDINGS draft was the empty-cart checkout, and we had already found it ourselves: we committed our own failing test (`099de48`) and fix (`babcc01`) for it before the audit, and it is recorded as Bug 2. `test_checkout_empty_returns_none` failed on shipped code and passed on fixed code, so it is a genuine detection, but it confirmed a bug we already had and did not reveal a new one. We found each of our bugs by reading the docstrings and trying odd inputs.
-   The supplied set caught the empty-checkout behavior problem through test_checkout_empty_returns_none. This issue was not recorded in the completed entries of our FINDINGS.md. The test failed against shipped code and passed against fixed code, demonstrating a genuine detection.
-4. **What will you check before trusting a generated test in future?** Name
-   checks you actually performed in this exercise, not general principles.
-   We ran all eight tests against the shipped code in a separate Git worktree and against our fixed code, saved the outputs, and compared each pair. We inspected the original Users.login() implementation and found that the wrong-password test did not expose the punctuation-cleaning bug. We also checked the catalog search behavior and found that the ten-result limit asserted by the AI test was not specified in the search function's documented behavior.
+   "Detects nothing" was the most common verdict, with 4 out of 8 tests. These tests passed on both shipped and fixed code and therefore did not demonstrate that they could detect a defect.
 
-Answers that could have been written about any project score half marks at
-best.
+2. **Why is a test that passes against buggy code more dangerous than one that crashes?**
+
+   A crashing test attracts attention, but a test that passes against buggy code creates false confidence. Developers may assume the feature is properly tested even though the test never exposes the defect. For example, `test_search_finds_exact_title` passed on both versions but did not detect our case-sensitive search bug.
+
+3. **Did the supplied set catch anything you had missed?**
+
+   No new bug was discovered by the supplied tests. However, `test_checkout_empty_returns_none` detected the empty-cart checkout bug (Bug 2), which our group had already found and recorded in `FINDINGS.md` before the audit. It confirmed an existing finding rather than revealing a new one.
+
+4. **What will you check before trusting a generated test in future?**
+
+   We ran all eight tests against the shipped code in a separate Git worktree and against our fixed code, saved the outputs, and compared each pair. We inspected the original `Users.login()` implementation and found that the wrong-password test did not expose the punctuation-cleaning bug. We also checked the catalog search behavior and confirmed that the ten-result limit asserted by the AI test was not specified in the project's documented requirements.
 
 ---
 
